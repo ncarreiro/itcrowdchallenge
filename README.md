@@ -1,16 +1,13 @@
-# itcrowdchallenge
-<<<<<<< HEAD
+# Tasks List (IT-Crowd Argentina Code Challenge)
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+Este proyecto fue generado con [yo angular generator](https://github.com/yeoman/generator-angular) versión 0.15.1.
 
-## Build & development
+## Desarrollo y build
 
-Run `grunt` for building and `grunt serve` for preview.
+Ejecutar el comando `grunt build` para buildear la versión distribuible.
+Ejecutar el comando `grunt serve` para el servidor local de desarrollo.
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma.
+Ejecutar `grunt test` para correr los tests unitarios con karma.
 =======
-Tasks List (IT-Crowd Argentina Code Challenge)
->>>>>>> d215f98bfaa926b99ffc23a05f71f6c68dc7e3ab
