@@ -1,23 +1,14 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<div class="container">
+  <h1 class="center">Tasks List</h1>
+  <div class="center"><img src="images/yeoman.png" alt="I'm Yeoman"></div>
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div class="tasks-list" dragula='"task-list"' dragula-model="taskList">
+    <div class="task-item" ng-repeat="item in taskList" dragula-scope="$parent">
+      <div class="task-id" ng-bind="item.id"></div>
+      <!-- <span class="task-title break" type="text" name="task-{{item.id}}-title" ng-bind="item.title"></span> -->
+      <div class="task-description break" type="text" name="task-{{item.id}}-description" ng-bind="item.description"></div>
+      <span class="space"></span>
+      <button>Editar</button><button>Borrar</button>
+    </div>
 </div>

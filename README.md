@@ -10,4 +10,3 @@ Ejecutar el comando `grunt serve` para el servidor local de desarrollo.
 ## Testing
 
 Ejecutar `grunt test` para correr los tests unitarios con karma.
-=======

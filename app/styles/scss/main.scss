@@ -53,7 +53,6 @@ $susy: (
 }
 
 // General Fixes
-
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -64,7 +63,9 @@ html {
 
 html,
 body {
-  color: $mp-color-black-1;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 1.1rem;
+  color: #333;
   height: 100%;
   background-color: #ffffff;
 }
@@ -98,7 +99,7 @@ select::-ms-expand {
 hr {
   border-style: solid;
   border-width: 1px 0 0 0;
-  border-color: $mp-color-white-3;
+  border-color: #bbb;
   margin: 20px 0;
 }
 
@@ -109,8 +110,8 @@ input[type="submit"], button.btn, a.btn, md-checkbox {
 }
 
 img {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  // width: 100%;
 }
 
 strong {
@@ -124,7 +125,7 @@ label {
   font-size: 12px;
   font-weight: 500;
   line-height: 10px;
-  color: $mp-color-grey-4;
+  color: #333;
   &.block {
     @extend .block;
     margin-bottom: 20px;
@@ -139,37 +140,8 @@ label {
     font-weight: 400;
     border-style: solid;
     border-width: 0 0 1px 0;
-    border-color: $mp-color-white-3;
+    border-color: #bbb;
     line-height: 30px;
-  }
-}
-
-h1 {
-  font-size: 24px;
-  margin-bottom: 12px;
-}
-
-h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-h3 {
-  font-size: 18px;
-  margin-bottom: 6px;
-}
-
-h4 {
-  font-size: 16px;
-  margin-bottom: 2px;
-}
-
-h1, h2, h3, h4 {
-  &.regular {
-    font-weight: 500;
-  }
-  &.bold {
-    font-weight: 600;
   }
 }
 
@@ -184,6 +156,10 @@ h1, h2, h3, h4 {
 
 .clear {
   @include clearfix;
+}
+
+.center {
+  text-align: center;
 }
 
 .break {
@@ -225,7 +201,7 @@ code {
 kbd {
   padding: 2px 4px;
   font-size: 90%;
-  color: $mp-color-white-1;
+  color: #fff;
   background-color: #333;
   border-radius: 3px;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.25);
@@ -259,4 +235,64 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
+  li {
+    list-style: none;
+  }
+}
+
+// Main Styles
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tasks-list {
+  background: #eee;
+  margin: 0 20px;
+  padding: 20px;
+  .task-id {
+    @extend .center;
+    display: inline-block;
+    background-color: red;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+  }
+  .task-item {
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+
+    padding: 10px 20px;
+
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #333;
+    &:last-of-type {
+      border-width: 0;
+    }
+    .task-title, .task-description {
+      display: inline-block;
+      width: 100%;
+      border-width: 0 0 1px 0;
+      border-style: solid;
+      border-color: transparent;
+      &:hover {
+        border-color: #333;
+      }
+    }
+    &:hover {
+      background-color: #bbb;
+    }
+    &.over {
+      background-color: green;
+    }
+  }
+}
+
+.gu-mirror {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }

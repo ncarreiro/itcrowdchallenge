@@ -8,6 +8,7 @@
  *
  * Main module of the application.
  */
+
 angular
   .module('itcrowdchallengeApp', [
     'ngAnimate',
@@ -15,9 +16,11 @@ angular
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngTouch',
+    // 'ngTouch',
     // 'ngRoute',
-    'ui.router'
+    'ngMaterial',
+    'ui.router',
+    angularDragula(angular)
   ])
   // lodash support
   .factory('_', ['$window',
@@ -40,6 +43,6 @@ angular
 
     $urlRouterProvider.otherwise('/');
   })
-  .run(function ($rootScope, _) {
+  .run(function ($rootScope) {
     $rootScope._ = window._;
   });
