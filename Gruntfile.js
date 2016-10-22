@@ -52,6 +52,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'postcss']
       },
+      sass: {
+        files: ['<%= yeoman.app %>/styles/scss/{,*/}*.{scss,sass}'],
+        tasks: ['sass:server']
+      },
       gruntfile: {
         files: ['Gruntfile.js']
       },
@@ -202,25 +206,29 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: new RegExp('.+?(?=/b)|.+?(?=../b)')
       },
       test: {
         devDependencies: true,
         src: '<%= karma.unit.configFile %>',
         ignorePath:  /\.\.\//,
-        fileTypes:{
+        fileTypes: {
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: '\'{{filePath}}\','
             }
           }
+        }
+      },
+      sass: {
+        src: ['<%= yeoman.app %>/styles/scss/{,*/}*.{scss,sass}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
       }
-    }, 
+    },
 
     // Renames files for browser caching purposes
     filerev: {
@@ -397,15 +405,46 @@ module.exports = function (grunt) {
       }
     },
 
+    // Transforms SCSS files to CSS
+    sass: {
+      options: {
+        style: 'compressed',
+        require: 'susy',
+        includePaths: [
+          'bower_components'
+        ]
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/styles/scss',
+          src: ['*.scss'],
+          dest: '.tmp/styles',
+          ext: '.css'
+        }]
+      },
+      server: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/styles/scss',
+          src: ['*.scss'],
+          dest: '.tmp/styles',
+          ext: '.css'
+        }]
+      }
+    },
+
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'sass:server',
         'copy:styles'
       ],
       test: [
         'copy:styles'
       ],
       dist: [
+        'sass',
         'copy:styles',
         'imagemin',
         'svgmin'
@@ -420,7 +459,6 @@ module.exports = function (grunt) {
       }
     }
   });
-
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -472,6 +510,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'newer:jscs',
+    'newer:sass',
     'test',
     'build'
   ]);

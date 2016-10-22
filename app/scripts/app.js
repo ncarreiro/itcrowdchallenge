@@ -14,23 +14,32 @@ angular
     'ngAria',
     'ngCookies',
     'ngResource',
-    'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    // 'ngRoute',
+    'ui.router'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
+  // lodash support
+  .factory('_', ['$window',
+    function($window) {
+      return $window._;
+    }
+  ])
+  // .constant('_', window._)
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('main', {
+        url: '/',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
+
+    $urlRouterProvider
+      .when('', '/');
+
+    $urlRouterProvider.otherwise('/');
+  })
+  .run(function ($rootScope, _) {
+    $rootScope._ = window._;
   });
