@@ -8,18 +8,28 @@
  * Controller of the itcrowdchallengeApp
  */
 angular.module('itcrowdchallengeApp')
-  .controller('MainCtrl', function ($scope, ServerInterface) {
-    ServerInterface.getList().then(function () {
-        ServerInterface.setList();
+  .controller('MainCtrl', function ($scope, Api, dragulaService) {
+    Api.getList().then(function () {
+        Api.setList();
     });
 
     $scope.createTask = function (data) {
-        ServerInterface.createTask(data);
+        Api.createTask(data);
     };
 
-    $scope.updateList = function () {
-        ServerInterface.getList();
+    $scope.updateTask = function (data) {
+        Api.updateTask(data);
     };
+
+    $scope.deleteTask = function (data) {
+        Api.deleteTask(data);
+    };
+
+    dragulaService.options($scope, 'tasks-list', {
+      moves: function (el, container, handle) {
+        return handle.className === 'handle';
+      }
+    });
 
     $scope.$on('task-item.drag', function (e, el) {
         console.log(el);

@@ -58,7 +58,7 @@ $susy: (
 }
 
 html {
-  overflow-y: auto !important;
+  overflow-y: scroll !important;
 }
 
 html,
@@ -126,8 +126,7 @@ strong {
 label {
   display: block;
   margin-bottom: 8px;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 0.9rem;
   line-height: 10px;
   color: #333;
   &.block {
@@ -191,6 +190,7 @@ pre {
   border: 1px solid #ccc;
   border-radius: 4px;
   &.debug {
+    z-index: 9;
     position: fixed;
     top: 10px;
     right: 20px;
@@ -250,6 +250,18 @@ ul {
   }
 }
 
+// Angular Material Hacks
+
+md-input-container {
+  width: 100%;
+  .md-input {
+    border-color: transparent;
+    &:hover {
+      border-color: rgba(0,0,0,0.12);
+    }
+  }
+}
+
 // Main Styles
 
 .container {
@@ -257,49 +269,61 @@ ul {
   margin: 0 auto;
 }
 
-.task-text {
-  display: inline-block;
-  padding: 15px 10px;
-  width: 100%;
-  border-width: 0 0 1px 0;
-  border-style: solid;
-  border-color: transparent;
-}
-
 .tasks-list {
-  background: #eee;
-  margin: 0 20px;
-  padding: 20px;
-  .task-id {
-    @extend .center;
-    display: inline-block;
-    background-color: red;
-    padding: 15px 20px;
-    margin-bottom: 20px;
+  margin: 0 100px;
+  padding: 80px 60px;
+  height: 800px;
+  .add-task {
+    padding: 0px 16px;
+    .md-input {
+      border-color: rgba(0,0,0,0.12);
+    }
+    .error {
+      margin-top: 5px;
+      color: red;
+    }
   }
   .task-item {
+    position: relative;
+
     cursor: move;
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
+    .task-id, .task-description, .task-actions {
+      height: 100%;
+    }
+    .task-id {
+      @extend .center;
+      pointer-events: none;
+      display: inline-block;
+      width: 10%;
 
-    border-width: 0 0 1px 0;
-    border-style: solid;
-    border-color: #333;
-    &:last-of-type {
-      border-width: 0;
+      padding: 2px;
+      margin: 18px 0;
     }
     .task-description {
-      @extend .task-text;
-      &:hover {
-        border-color: #333;
+      display: inline-block;
+      width: 80%;
+      input {
+        width: 100%;
+        padding: 7px 0;
       }
     }
-    &:hover {
-      background-color: #bbb;
+    .task-actions {
+      display: inline-block;
+      margin: 18px 0;
+      // display: none;
+      width: 10%;
+      button {
+        background: transparent;
+        border: 0;
+      }
     }
-    &.over {
-      background-color: green;
+    &.hovered {
+      .task-actions {
+        display: inline-block;
+      }
     }
   }
 }
