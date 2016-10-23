@@ -21,23 +21,23 @@ angular
     'ngMaterial',
     'ui.router',
     'angular-websql',
-    angularDragula(angular)
+    angularDragula(angular) // jshint ignore:line
   ])
-  // lodash support
+  // lodash Global Support
   .factory('_', ['$window',
     function($window) {
       return $window._;
     }
   ])
-  // .constant('_', window._)
   .config(function ($stateProvider, $urlRouterProvider) {
+    // Setting up UI-Router
     $stateProvider
       .state('main', {
         url: '/',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
-      });
+    });
 
     $urlRouterProvider
       .when('', '/');
@@ -45,16 +45,19 @@ angular
     $urlRouterProvider.otherwise('/');
   })
   .run(function ($rootScope, $webSql) {
+    // Setting global $rootScope._ for lodash Support in Views
     $rootScope._ = window._;
 
+    // Creating WebSQL Database with $webSQL
     $rootScope.db = $webSql.openDatabase('tasksdb', '1.0', 'Tasks DB', 2 * 1024 * 1024);
 
+    // Creating Tasks List Table with $webSQL
     $rootScope.db.createTable('tasks', {
       'task_id': {
         'type': 'INTEGER',
-        'null': 'NOT NULL', // default is 'NULL' (if not defined)
-        'primary': true, // primary
-        'auto_increment': true // auto increment
+        'null': 'NOT NULL',
+        'primary': true,
+        'auto_increment': true
       },
       'task_description':{
         'type': 'TEXT',

@@ -39,7 +39,7 @@ $susy: (
   )
 );
 
-// If Browser is not compatible with App
+// If browser is not compatible with App
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -52,7 +52,7 @@ $susy: (
   color: red; font-weight: 600;
 }
 
-// General Fixes
+// Global fixes and settings
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -68,6 +68,10 @@ body {
   color: #333;
   height: 100%;
   background-color: #ffffff;
+}
+
+body {
+  padding: 1px;
 }
 
 textarea {
@@ -100,6 +104,13 @@ select::-ms-expand {
   display: none;
 }
 
+h1 {
+  &.border {
+    padding-bottom: 10px;
+    border-bottom: 7px solid #282425;
+  }
+}
+
 hr {
   border-style: solid;
   border-width: 1px 0 0 0;
@@ -114,7 +125,7 @@ input[type="submit"], button.btn, a.btn, md-checkbox {
 }
 
 img {
-  display: inline-block;
+  display: block;
   // width: 100%;
 }
 
@@ -234,6 +245,10 @@ blockquote {
   }
 }
 
+button {
+  padding: 0;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
@@ -251,6 +266,9 @@ ul {
 }
 
 // Angular Material Hacks
+md-content {
+  border-radius: 3px;
+}
 
 md-input-container {
   width: 100%;
@@ -260,19 +278,36 @@ md-input-container {
       border-color: rgba(0,0,0,0.12);
     }
   }
+  .md-errors-spacer {
+    display: none;
+  }
+}
+
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-input, md-input-container:not(.md-input-invalid).md-input-focused .md-input, md-input-container.md-default-theme:not(.md-input-invalid).md-input-resized .md-input, md-input-container:not(.md-input-invalid).md-input-resized .md-input {
+  border-color: #4a9835;
+}
+
+md-list {
+  padding: 0;
 }
 
 // Main Styles
-
 .container {
+  @include clearfix;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 50px auto;
 }
 
+.mesh-logo {
+  margin: 20px auto;
+}
+
+// Tasks List
 .tasks-list {
-  margin: 0 100px;
-  padding: 80px 60px;
-  height: 800px;
+  margin: 20px 150px;
+  .no-tasks {
+    color: #bbb;
+  }
   .add-task {
     padding: 0px 16px;
     .md-input {
@@ -290,20 +325,29 @@ md-input-container {
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
+
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: rgba(0,0,0,0.12);
+    &:hover {
+      background: #e5e6e7;
+    }
+    &:last-of-type {
+      border: 0;
+    }
     .task-id, .task-description, .task-actions {
+      float: left;
       height: 100%;
+      font-weight: 600;
     }
     .task-id {
-      @extend .center;
       pointer-events: none;
-      display: inline-block;
       width: 10%;
 
       padding: 2px;
-      margin: 18px 0;
+      margin: 23px 0;
     }
     .task-description {
-      display: inline-block;
       width: 80%;
       input {
         width: 100%;
@@ -311,13 +355,18 @@ md-input-container {
       }
     }
     .task-actions {
-      display: inline-block;
-      margin: 18px 0;
+      margin: 23px 0;
       // display: none;
       width: 10%;
       button {
+        float: right;
         background: transparent;
         border: 0;
+        opacity: 0.15;
+        &:hover {
+          opacity: 1;
+          color: #f05a27;
+        }
       }
     }
     &.hovered {
@@ -328,6 +377,7 @@ md-input-container {
   }
 }
 
+// Dragula cursor change when dragging item
 .gu-mirror {
   cursor: grabbing;
   cursor: -moz-grabbing;

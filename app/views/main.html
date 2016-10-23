@@ -1,17 +1,19 @@
-<div class="container">
+<!-- <pre class="debug">{{taskList | json}}</pre> -->
+
+<div class="app-title">
+  <img class="mesh-logo" src="images/mesh-logo.png" />
   <h1 class="center">Tasks List</h1>
 </div>
 
-<!-- <pre class="debug">{{taskList | json}}</pre> -->
-
 <div class="tasks-list">
-  <label>Type task and press Enter:</label>
+  <h1 class="border">New Task</h1>
+  <label>Type the Task Description and press Enter:</label>
   <span class="space"></span>
 
   <form ng-submit="createTask(newTask)">
     <md-content class="add-task">
       <md-input-container flex-gt-sm>
-        <input type="text" name="newTask-task-description" ng-model="newTask.task_description" aria-label="newTask-description">
+        <input type="text" name="newTask-task-description" ng-model="newTask.task_description" aria-label="newTask-description" maxlength="25">
         <div class="space" ng-if="error"></div>
         <div class="error" ng-bind="error" ng-if="error"></div>
       </md-input-container>
@@ -20,13 +22,18 @@
 
   <span class="space"></span>
 
+  <h1 class="border">Tasks List</h1>
   <md-content>
     <md-list dragula='"task-list"' dragula-model="taskList" flex>
-      <md-list-item class="task-item md-3-line" ng-repeat="task in taskList" dragula-scope="$parent" ng-class="{'hovered': hover.item}" ng-mouseenter="hover.item = true;" ng-mouseleave="hover.item = false;">
+      <div class="no-tasks" ng-if="!taskList || !taskList.length">
+        <h1 class="center">No Tasks saved.</h1>
+        <h2 class="center">Add a new Task with the "New task" form.</h2>
+      </div>
+      <md-list-item class="task-item" ng-repeat="task in taskList" dragula-scope="$parent" ng-class="{'hovered': hover.item}" ng-mouseenter="hover.item = true;" ng-mouseleave="hover.item = false;">
         <div class="task-id" ng-bind="'#' + task.task_id"></div>
         <div class="task-description">
           <md-input-container flex-gt-sm>
-            <input name="task-{{task.task_id}}-description" ng-model="task.task_description" aria-label="task-{{task.task_id}}-description" ng-blur="updateTask(task)">
+            <input name="task-{{task.task_id}}-description" ng-model="task.task_description" aria-label="task-{{task.task_id}}-description" ng-blur="updateTask(task)" maxlength="25" required>
           </md-input-container>
         </div>
         <div class="task-actions">
