@@ -8,6 +8,8 @@ Si se desean crear los componentes de Angular, este proyecto fue generado con [y
 
 ## Desarrollo y build
 
+Ejecutar el comando `npm install && bower install` para instalar dependencias de Node y Bower.
+
 Ejecutar el comando `grunt serve` para correr el servidor local de desarrollo.
 
 Ejecutar el comando `grunt build` para generar la versión distribuible.
