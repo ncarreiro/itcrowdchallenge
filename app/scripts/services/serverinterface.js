@@ -16,8 +16,6 @@ function ServerInterface($rootScope, $webSql, _) {
     var Service = function () {};
 
     Service.prototype.getList = function () {
-        $rootScope.taskList = [];
-
         var list = $rootScope.db.selectAll('tasks').then(function(results) {
             return results;
         });
@@ -26,12 +24,21 @@ function ServerInterface($rootScope, $webSql, _) {
     };
 
     Service.prototype.setList = function () {
+        if (!$rootScope.taskList) {
+            $rootScope.taskList = [];
+        }
+
         this.getList().then(function (response) {
             _.forEach(response.rows, function (task) {
                 $rootScope.taskList.push(task);
             });
         });
 
+        return true;
+    };
+
+    Service.prototype.updateList = function (task) {
+        $rootScope.taskList.push(task);
         return true;
     };
 
@@ -51,9 +58,14 @@ function ServerInterface($rootScope, $webSql, _) {
             return id = response.rows.length;
         });
 
-        $rootScope.db.insert('tasks', {'task_id': id + 1, 'task_description': data.description});
+        var task = {
+            'task_id': id + 1,
+            'task_description': data.description
+        };
 
-        this.setList();
+        $rootScope.db.insert('tasks', task);
+
+        this.updateList(task);
 
         return true;
     };

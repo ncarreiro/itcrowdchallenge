@@ -8,19 +8,18 @@
 <span ng-bind="error" ng-if="error"></span>
 
 <div class="tasks-list">
-  <div class="task-item">
-    <form>
+  <div class="add-task">
+    <form ng-submit="createTask(newTask)">
       Type task and Save:
-      <textarea type="text" class="newTask-description" name="newTask-description" ng-model="newTask.description"></textarea>
+      <input type="text" class="task-text" name="newTask-description" ng-model="newTask.description">
       <span class="space"></span>
-      <button ng-click="createTask(newTask)">Save</button>
     </form>
   </div>
   <div dragula='"task-list"' dragula-model="taskList">
     <div class="task-item" ng-repeat="task in taskList" dragula-scope="$parent">
       <div class="task-id" ng-model="task.task_id" ng-if="task.id"></div>
-      <form>
-        <textarea type="text" class="task-description" name="task-{{task.task_id}}-description" ng-model="task.task_description"></textarea>
+      <form ng-submit="editTask(task)">
+        <input class="task-text" name="task-{{task.task_id}}-description" ng-model="task.task_description" disabled>
       </form>
     </div>
   </div>

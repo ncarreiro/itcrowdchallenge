@@ -194,6 +194,9 @@ pre {
     position: fixed;
     top: 10px;
     right: 20px;
+    max-width: 350px;
+    max-height: 400px;
+    overflow: auto;
   }
 }
 
@@ -256,14 +259,9 @@ ul {
 
 .task-text {
   display: inline-block;
-  width: 100%;
   border-width: 0 0 1px 0;
   border-style: solid;
   border-color: transparent;
-}
-
-textarea {
-  @extend .task-text;
 }
 
 .tasks-list {
@@ -282,8 +280,6 @@ textarea {
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
-
-    padding: 10px 20px;
 
     border-width: 0 0 1px 0;
     border-style: solid;
