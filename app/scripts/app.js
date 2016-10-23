@@ -20,6 +20,7 @@ angular
     // 'ngRoute',
     'ngMaterial',
     'ui.router',
+    'angular-websql',
     angularDragula(angular)
   ])
   // lodash support
@@ -43,6 +44,21 @@ angular
 
     $urlRouterProvider.otherwise('/');
   })
-  .run(function ($rootScope) {
+  .run(function ($rootScope, $webSql) {
     $rootScope._ = window._;
+
+    $rootScope.db = $webSql.openDatabase('tasksdb', '1.0', 'Tasks DB', 2 * 1024 * 1024);
+
+    $rootScope.db.createTable('tasks', {
+      'task_id': {
+        'type': 'INTEGER',
+        'null': 'NOT NULL', // default is 'NULL' (if not defined)
+        'primary': true, // primary
+        'auto_increment': true // auto increment
+      },
+      'task_description':{
+        'type': 'TEXT',
+        'null': 'NOT NULL'
+      }
+    });
   });

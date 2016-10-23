@@ -70,6 +70,10 @@ body {
   background-color: #ffffff;
 }
 
+textarea {
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+
 a {
   text-decoration: none;
   &:hover {
@@ -180,14 +184,17 @@ pre {
   @extend .break;
   display: block;
   padding: 9.5px;
-  margin: 0 0 10px;
-  width: 100%;
-  font-size: 13px;
+  font-size: 0.6rem;
   line-height: 1.42857143;
   color: #333;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   border-radius: 4px;
+  &.debug {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+  }
 }
 
 code {
@@ -247,6 +254,18 @@ ul {
   margin: 0 auto;
 }
 
+.task-text {
+  display: inline-block;
+  width: 100%;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: transparent;
+}
+
+textarea {
+  @extend .task-text;
+}
+
 .tasks-list {
   background: #eee;
   margin: 0 20px;
@@ -272,12 +291,8 @@ ul {
     &:last-of-type {
       border-width: 0;
     }
-    .task-title, .task-description {
-      display: inline-block;
-      width: 100%;
-      border-width: 0 0 1px 0;
-      border-style: solid;
-      border-color: transparent;
+    .task-description {
+      @extend .task-text;
       &:hover {
         border-color: #333;
       }
