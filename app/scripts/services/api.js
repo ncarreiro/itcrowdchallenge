@@ -14,7 +14,7 @@ angular.module('itcrowdchallengeApp')
 
 function Api($rootScope, $webSql, $mdToast, _) {
   // Creating global vars
-  var id, task;
+  var task;
 
   var Service = function () {};
 
@@ -52,6 +52,8 @@ function Api($rootScope, $webSql, $mdToast, _) {
 
     // Getting Tasks list in DB
     Service.prototype.getList().then(function (response) {
+      var id;
+
       if (response) {
         // Check for duplicated task
         var checkDuplicated = _.find(response.rows, {'task_description': data.task_description});
@@ -142,6 +144,28 @@ function Api($rootScope, $webSql, $mdToast, _) {
     $mdToast.show(
       $mdToast.simple()
       .textContent('Task deleted!')
+      .position('top')
+      .hideDelay(3000)
+    );
+
+    return true;
+  };
+
+  Service.prototype.deleteAllTasks = function () {
+    // Deleting all tasks from DB table
+    Service.prototype.getList().then(function (response) {
+      _.forEach(response.rows, function (task) {
+        $rootScope.db.del('tasks', {'task_id': task.task_id});
+      });
+    });
+
+    // Deleting task from view table
+    $rootScope.taskList = [];
+
+    // Success Toast
+    $mdToast.show(
+      $mdToast.simple()
+      .textContent('All Tasks deleted!')
       .position('top')
       .hideDelay(3000)
     );

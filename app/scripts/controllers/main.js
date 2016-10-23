@@ -10,7 +10,7 @@
 angular.module('itcrowdchallengeApp')
   .controller('MainCtrl', function ($scope, Api, dragulaService) {
     // Getting Tasks List
-    Api.getList().then(function (response) {
+    Api.getList().then(function () {
       Api.setList();
     });
 
@@ -27,6 +27,11 @@ angular.module('itcrowdchallengeApp')
     // Delete Task
     $scope.deleteTask = function (data) {
       Api.deleteTask(data);
+    };
+
+    // Delete All Tasks
+    $scope.deleteAllTasks = function () {
+      Api.deleteAllTasks();
     };
 
     // Dragula Options and $scopes

@@ -245,10 +245,6 @@ blockquote {
   }
 }
 
-button {
-  padding: 0;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
@@ -339,6 +335,9 @@ md-list {
       float: left;
       height: 100%;
       font-weight: 600;
+      button {
+        padding: 0;
+      }
     }
     .task-id {
       pointer-events: none;
