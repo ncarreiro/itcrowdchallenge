@@ -28,7 +28,7 @@ function ServerInterface($rootScope, $webSql, _) {
             $rootScope.taskList = [];
         }
 
-        this.getList().then(function (response) {
+        Service.prototype.getList().then(function (response) {
             _.forEach(response.rows, function (task) {
                 $rootScope.taskList.push(task);
             });
@@ -43,29 +43,29 @@ function ServerInterface($rootScope, $webSql, _) {
     };
 
     Service.prototype.createTask = function (data) {
-        var id;
+        var id, task;
 
         if (!data) {
             $rootScope.error = 'Debe completar los datos';
             return false;
         }
 
-        this.getList().then(function (response) {
-            if (!response) {
-                return id = 0;
+        Service.prototype.getList().then(function (response) {
+            if (response) {
+                id = response.rows.length;
+            } else {
+                id = 0;
             }
 
-            return id = response.rows.length;
+            task = {
+                'task_id': id + 1,
+                'task_description': data.description
+            };
+
+            $rootScope.db.insert('tasks', task);
+
+            Service.prototype.updateList(task);
         });
-
-        var task = {
-            'task_id': id + 1,
-            'task_description': data.description
-        };
-
-        $rootScope.db.insert('tasks', task);
-
-        this.updateList(task);
 
         return true;
     };
