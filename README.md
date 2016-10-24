@@ -2,9 +2,9 @@
 
 ## Requerimientos
 
-Es necesario tener instalado [node](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions), [grunt](http://gruntjs.com/getting-started), y [yeoman](http://yeoman.io/).
+Es necesario tener instalado [node](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions), [bower](https://bower.io/#install-bower), y [grunt](http://gruntjs.com/getting-started).
 
-Si se desean crear los componentes de Angular, este proyecto fue generado con [yo angular generator](https://github.com/yeoman/generator-angular). Seguir los pasos para instalar el mismo en su repositorio.
+Si se desean crear componentes de Angular, este proyecto fue generado con [yeoman](http://yeoman.io/) y [yo angular generator](https://github.com/yeoman/generator-angular). Seguir los pasos para instalar y utilizar el generador en su repositorio.
 
 ## Desarrollo y build
 
