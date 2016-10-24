@@ -1,5 +1,9 @@
 # Tasks List (IT-Crowd Argentina Code Challenge)
 
+## Demo
+
+Se puede ver el Demo del proyecto (commits hasta 24/10/2016) en el siguiente link: https://ncarreiro.github.io/itcrowdchallenge/
+
 ## Requerimientos
 
 Es necesario tener instalado [node](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions), [bower](https://bower.io/#install-bower), y [grunt](http://gruntjs.com/getting-started).
